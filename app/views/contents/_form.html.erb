@@ -21,6 +21,11 @@
     <%= form.text_area :detail ,size: "100x20"%>
   </div>
 
+  <div class="field">
+    <%= form.label :tag_list %>
+    <%= text_field_tag 'content[tag_list]', @content.tag_list.join(',') ,size: "100"%>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
