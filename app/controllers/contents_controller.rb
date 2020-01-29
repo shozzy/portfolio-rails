@@ -5,7 +5,28 @@ class ContentsController < ApplicationController
   # GET /contents
   # GET /contents.json
   def index
-    @contents = Content.all
+    # 条件指定を可能にする
+    # ただし、あらかじめ許可した内容以外は条件として指定できないようにする
+    @categories = ["top", "profile", "history", "products"]
+    category = ""
+    unless params[:category].blank?
+      category = params[:category].to_s
+      checked = false
+      @categories.each do |item| 
+        if category == item
+          checked = true
+        end
+      end
+      if !checked
+        category = ""
+      end
+    end
+    logger.debug("category=["+category+"]")
+    @contents = Content.where(category: category).includes(:tags)
+    respond_to do |format|
+      format.html { @contents }
+      format.json { render json: @contents }
+    end
   end
 
   # GET /contents/1
@@ -70,6 +91,6 @@ class ContentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def content_params
-      params.require(:content).permit(:title, :detail, :tag_list)
+      params.require(:content).permit(:title, :detail, :category, :tag_list)
     end
 end
