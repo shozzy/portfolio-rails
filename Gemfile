@@ -73,3 +73,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'rack-cors'
 gem 'acts-as-taggable-on'
+gem 'active_model_serializers'
