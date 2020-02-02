@@ -7,12 +7,15 @@ class ContentsController < ApplicationController
   def index
     # 条件指定を可能にする
     # ただし、あらかじめ許可した内容以外は条件として指定できないようにする
-    @categories = ["top", "profile", "history", "products"]
+    categories = ["top", "profile", "history", "products"]
     category = ""
-    unless params[:category].blank?
+    @contents = ""
+    if params[:category].blank?
+      @contents = Content.all.includes(:tags)
+    else
       category = params[:category].to_s
       checked = false
-      @categories.each do |item| 
+      categories.each do |item| 
         if category == item
           checked = true
         end
@@ -20,9 +23,9 @@ class ContentsController < ApplicationController
       if !checked
         category = ""
       end
+      logger.debug("category=["+category+"]")
+      @contents = Content.where(category: category).includes(:tags)
     end
-    logger.debug("category=["+category+"]")
-    @contents = Content.where(category: category).includes(:tags)
     respond_to do |format|
       format.html { @contents }
       format.json { render json: @contents }
