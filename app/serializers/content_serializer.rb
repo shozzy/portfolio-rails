@@ -1,5 +1,5 @@
 class ContentSerializer < ActiveModel::Serializer
-  attributes :id, :category, :title, :when, :detail
+  attributes :id, :category, :title, :when, :detail, :sequence
   has_many :taggings
   has_many :tags, through: :taggings
 

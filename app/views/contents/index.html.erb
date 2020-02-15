@@ -7,6 +7,7 @@
         <th>Category</th>
         <th>Title</th>
         <th>When</th>
+        <th>Sequence</th>
         <th>Detail</th>
         <th>Tags</th>
         <th colspan="3"></th>
@@ -19,6 +20,7 @@
           <td><%= content.category %></td>
           <td><%= content.title %></td>
           <td><%= content.when %></td>
+          <td><%= content.sequence %></td>
           <td><%= content.detail %></td>
           <td><%= content.tags.pluck(:name).join(', ') %></td>
           <td><%= link_to 'Show', content %></td>

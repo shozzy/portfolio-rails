@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_02_095056) do
+ActiveRecord::Schema.define(version: 2020_02_03_152053) do
 
   create_table "contents", force: :cascade do |t|
     t.string "title"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2020_02_02_095056) do
     t.datetime "updated_at", null: false
     t.string "category"
     t.string "when"
+    t.integer "sequence"
   end
 
   create_table "taggings", force: :cascade do |t|
